@@ -1,0 +1,26 @@
+{
+	"Book1":
+	{
+		"sensorNo": "1",
+		"waterHeight": "10 cm",
+		"status": "running"
+	},
+	"Book2":
+	{
+		"sensorNo": "2",
+		"waterHeight": "1 cm",
+		"status": "running"	
+	},
+	"Book3":
+	{
+		"sensorNo": "3",
+		"waterHeight": "15 cm",
+		"status": "running"
+	},
+	"Book4":
+	{
+		"sensorNo": "4",
+		"waterHeight": "20 cm",
+		"status": "running"
+	}
+}

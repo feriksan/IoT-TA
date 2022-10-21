@@ -1,0 +1,3 @@
+link https://iot-ta-cacb8-default-rtdb.asia-southeast1.firebasedatabase.app/
+
+secret bClJb5ocIQwBhB725P0vwq0ATjWUw09ycb1NDnVS
