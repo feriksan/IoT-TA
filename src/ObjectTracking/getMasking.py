@@ -46,6 +46,9 @@ class getMasking:
         cx = 485.1822284643787
         cy = 273.7921446374951
 
+        cameraHeight = 30
+        objectDiameter = 0.02
+
 
         lower_blue = np.array([l_h, l_s, l_v])
         upper_blue = np.array([u_h, u_s, u_v])
@@ -81,15 +84,14 @@ class getMasking:
                 # draw the center of the circle
                 cv2.circle(result,(i[0],i[1]),2,(0,0,255),3)
                 Z_median = []
-                Z = (fx * 0.02)/(i[2])
-                print(self.img_count)
+                Z = (fx * objectDiameter)/(i[2])
                 if(self.img_count < 16):
-                    print(Z)
                     Z_median.append(Z)
                     if(self.img_count == 15):
                         Z = np.average(Z_median)
-                        waterHeight = Z*100
-                        self.firebase.updateWaterHeight(waterHeight)
+                        print(Z)
+                        waterHeight = cameraHeight-Z*100
+                        self.firebase.updateWaterHeight(waterHeight, cameraHeight, Z, objectDiameter)
                 else:
                     self.img_count = 0
                     Z_median = []
