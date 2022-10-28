@@ -50,8 +50,8 @@ class getMasking:
         objectDiameter = 0.02
 
 
-        lower_blue = np.array([l_h, l_s, l_v])
-        upper_blue = np.array([u_h, u_s, u_v])
+        lower_blue = np.array([0, 0, 0])
+        upper_blue = np.array([255, 255, 255])
 
 
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
@@ -101,12 +101,12 @@ class getMasking:
             print("no circle")
         # Draw the circles
 
-        cv2.imshow("mask", mask)
-        cv2.imshow("result", result)
+        # cv2.imshow("mask", mask)
+       	# cv2.imshow("result", result)
 
     def startVideo(self):
         cap =  cv2.VideoCapture(0)
-        self.createWindows()
+        # self.createWindows()
         while True:
             time.sleep(1)
             self.videoTracking(cap)
