@@ -1,10 +1,12 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+import os
 
 class FirebaseConnect:
 	def __init__(self):
-		cred_obj = credentials.Certificate('D:\Object Tracking\FirebaseCertificate\iot-ta-cacb8-firebase-adminsdk-ttfjb-56402dadcc.json')
+		ROOT_DIR = os.path.abspath(os.curdir)
+		cred_obj = credentials.Certificate(ROOT_DIR+'\FirebaseCertificate\iot-ta-cacb8-firebase-adminsdk-ttfjb-56402dadcc.json')
 		default_app = firebase_admin.initialize_app(cred_obj, {
 			'databaseURL':'https://iot-ta-cacb8-default-rtdb.asia-southeast1.firebasedatabase.app/'
 			})
