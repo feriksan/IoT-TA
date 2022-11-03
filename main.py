@@ -1,6 +1,6 @@
 from src.ObjectTracking.getMasking import getMasking
 from Firebase.firebaseConnect import FirebaseConnect
-import cv2
+# import cv2
 # from src.TcpClient import tcpClient
 
 # firebase = FirebaseConnect()

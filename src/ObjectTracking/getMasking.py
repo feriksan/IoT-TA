@@ -101,12 +101,12 @@ class getMasking:
             print("no circle")
         # Draw the circles
 
-        # cv2.imshow("mask", mask)
-       	# cv2.imshow("result", result)
+        cv2.imshow("mask", mask)
+       	cv2.imshow("result", result)
 
     def startVideo(self):
         cap =  cv2.VideoCapture(0)
-        # self.createWindows()
+        self.createWindows()
         while True:
             time.sleep(1)
             self.videoTracking(cap)
