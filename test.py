@@ -6,7 +6,7 @@ import urllib.request
 def nothing(x):
     pass
 
-# cap =  cv2.VideoCapture(0)
+cap =  cv2.VideoCapture(0)
 # prepare object points
 nx = 8
 ny = 6

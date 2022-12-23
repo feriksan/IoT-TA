@@ -20,7 +20,7 @@ fy_avr = 0
 cx_avr = 0
 cy_avr = 0
 
-images = glob.glob('foundImage/*.png')
+images = glob.glob('foundImage3/*.png')
 for fname in images:
     img = cv.imread(fname)
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
@@ -32,6 +32,7 @@ for fname in images:
         corners2 = cv.cornerSubPix(gray,corners, (11,11), (-1,-1), criteria)
         imgpoints.append(corners)
         ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+        print(mtx)
         fx.append(mtx[0][0])
         fy.append(mtx[1][1])
         cx.append(mtx[0][2])

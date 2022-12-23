@@ -41,13 +41,15 @@ class getMasking:
         u_s = cv2.getTrackbarPos("U - S", "TrackBars")
         u_v = cv2.getTrackbarPos("U - V", "TrackBars")
         
+        F = 45.78947368421053
+        fx2 = 1178.473863782612
         fx = 943.8170126557516
         fy = 899.3625747289594
         cx = 485.1822284643787
         cy = 273.7921446374951
 
         cameraHeight = 30
-        objectDiameter = 0.02
+        objectDiameter = 0.038
 
 
         lower_blue = np.array([0, 0, 0])
@@ -84,13 +86,16 @@ class getMasking:
                 # draw the center of the circle
                 cv2.circle(result,(i[0],i[1]),2,(0,0,255),3)
                 Z_median = []
-                Z = (fx * objectDiameter)/(i[2])
+                Z = (fx2 * objectDiameter)/(i[2])
+                # F = (i[2] * 60)/38
+                # print(F)
+                D = (38*F)/i[2]
+                print(D)
                 if(self.img_count < 16):
                     Z_median.append(Z)
                     if(self.img_count == 15):
                         Z = np.average(Z_median)
-                        print(Z)
-                        waterHeight = cameraHeight-Z*100
+                        waterHeight = cameraHeight-Z
                         self.firebase.updateWaterHeight(waterHeight, cameraHeight, Z, objectDiameter)
                 else:
                     self.img_count = 0
@@ -102,13 +107,12 @@ class getMasking:
         # Draw the circles
 
         # cv2.imshow("mask", mask)
-       	# cv2.imshow("result", result)
+       	cv2.imshow("result", result)
 
     def startVideo(self):
         cap =  cv2.VideoCapture(0)
         # self.createWindows()
         while True:
-            time.sleep(1)
             self.videoTracking(cap)
             key = cv2.waitKey(1)
             if key == 27:
