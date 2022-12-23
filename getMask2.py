@@ -101,14 +101,8 @@ while True:
             X = ((int(x) - cx) * Z)/fx
             Y = ((int(y) - cy) * Z)/fy
             # print("Z Pos: ", Z - (0.4815299109073973))
-            print("X Pos: ", X - (-0.13274344879587063))
+            print("Z Pos: ", Z)
             # print("Y Pos: ", Y - (-0.014344847542938004))
-
-            if(Z - (0.4815299109073973) < -0.02):
-                print("Kurang Mundur")
-            
-            if(Z - (0.4815299109073973) > 0.02):
-                print("Kurang Maju")
 
             # file = open("data.txt", "a")
             # content2 = str(X)
