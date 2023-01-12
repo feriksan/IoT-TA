@@ -3,8 +3,10 @@ import numpy as np
 
 videoCaptureObject = cv2.VideoCapture(0)
 img_count = 0
-jarak_diuji = 60
+jarak_diuji = 20
 diameter_objek = 38
+diameter_objek2 = 109.8
+
 
 while(True):
     ret,frame = videoCaptureObject.read()

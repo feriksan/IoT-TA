@@ -13,22 +13,29 @@ Y = []
 Z = []
 true = []
 avr = []
+avrDiameter = []
 avrValue = 0
-val = 60.0
+diameterValue = 0
+val = 10
 
-with open('dataLinearAvearge.txt', 'r') as datafile:
+with open('dataWithDiameter.txt', 'r') as datafile:
     plotting = csv.reader(datafile, delimiter=',')
     for ROWS in plotting:
-        if(float(ROWS[1]) == val):
+        if(float(ROWS[4]) == val):
             avr.append(float(ROWS[0]))
+            avrDiameter.append(float(ROWS[1]))
         # X.append(float(ROWS[0]))
         # Y.append(float(ROWS[1]))
-        print(float(ROWS[0]))
+        # print(float(ROWS[0]))
         # true.append(float(ROWS[1]))
         # Z.append(float(ROWS[0]))
 
 # Data for a three-dimensional line
-# avrValue = np.average(avr)
+avrValue = np.average(avr)
+diameterValue = np.average(avrDiameter)
+# print(round(D, 5))
+# print(round(avrValue, 5))
+# print(round(diameterValue, 2))
 # print("{},{}".format(avrValue, val))
 # zline = Z
 # plt.figure(figsize=(10,10))
