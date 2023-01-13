@@ -1,4 +1,3 @@
-Jarak yang Didapat, Diameter yang Didapat, Ketinggian Air yang Didapat, Ketinggian Air Sebenarnya, Jarak yang Sebenarnya
 10.116279069767442,172.0,49.883720930232556,50,10
 10.29585798816568,169.0,49.70414201183432,50,10
 10.116279069767442,172.0,49.883720930232556,50,10
