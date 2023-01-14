@@ -35,7 +35,6 @@ class FirebaseConnect:
 				ref.child(key).update({
 						"waterHeight":dataSend,
 						"satuan": "Cm",
-						"waterStatus": "Safe" if dataSend > cameraheight else "Warning",
 						"cameraHeight": cameraheight,
 						"objectToCameraDistance": objectToCamera,
 						"ballDiameter": diameter
