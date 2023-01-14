@@ -30,10 +30,12 @@ class FirebaseConnect:
 		dataSend = str(val)
 		for key, value in sensorData.items():
 			data = ref.child(key).get()
+			# Set Sensor ID
 			if(data['sensorNo'] == '1'):
 				ref.child(key).update({
 						"waterHeight":dataSend,
 						"satuan": "Cm",
+						"waterStatus": "Safe" if dataSend > cameraheight/2 else "Warning",
 						"cameraHeight": cameraheight,
 						"objectToCameraDistance": objectToCamera,
 						"ballDiameter": diameter
