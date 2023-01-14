@@ -124,7 +124,6 @@ class getMasking:
             # self.img_count+=1
             
         except Exception as e:
-            print(e)
             print("no circle")
         # Draw the circles
 
