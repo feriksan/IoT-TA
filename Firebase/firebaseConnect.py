@@ -24,7 +24,7 @@ class FirebaseConnect:
 			data = ref.child(key).get()
 			print(data)
 
-	def updateWaterHeight(self, val, cameraheight, objectToCamera, diameter):
+	def updateWaterHeight(self, val, cameraheight, objectToCamera, diameter, waterStatus):
 		ref = db.reference("/API/WaterControll")
 		sensorData = ref.get()
 		dataSend = str(val)
@@ -35,7 +35,7 @@ class FirebaseConnect:
 				ref.child(key).update({
 						"waterHeight":dataSend,
 						"satuan": "Cm",
-						"waterStatus": "Safe" if dataSend > cameraheight else "Warning",
+						"waterStatus": waterStatus,
 						"cameraHeight": cameraheight,
 						"objectToCameraDistance": objectToCamera,
 						"ballDiameter": diameter

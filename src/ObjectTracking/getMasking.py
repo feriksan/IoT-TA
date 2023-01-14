@@ -85,24 +85,46 @@ class getMasking:
                 cv2.circle(result,(i[0],i[1]),i[2],(0,255,0),2)
                 # draw the center of the circle
                 cv2.circle(result,(i[0],i[1]),2,(0,0,255),3)
-                Z_median = []
-                Z = (fx2 * objectDiameter)/(i[2])
-                # F = (i[2] * 60)/38
-                # print(F)
-                D = (38*F)/i[2]
-                print(D)
+                diameterList = []
+                diameterMean = 0
                 if(self.img_count < 16):
-                    Z_median.append(Z)
+                    diameterList.append(i[2])
                     if(self.img_count == 15):
-                        Z = np.average(Z_median)
-                        waterHeight = cameraHeight-Z
-                        self.firebase.updateWaterHeight(waterHeight, cameraHeight, Z, objectDiameter)
+                        diameterMean = np.average(diameterList)
+                        D = (38*F)/diameterMean
+                        waterHeight = cameraHeight-D
+                        if(waterHeight < 0):
+                            waterHeight = 0
+                        print(waterHeight)
+                        waterStatus = "Safe" if waterHeight <= cameraHeight/2 else "Not Safe"
+                        self.firebase.updateWaterHeight(waterHeight, cameraHeight, D, objectDiameter, waterStatus)
+                        # file.write(str(D) + "," + str(diameterMean) + "," + str(waterHeight) +  "," +  contentTrue + "," +  cameraDistanceTrue + "\n")
+                        # file.close()
                 else:
                     self.img_count = 0
-                    Z_median = []
+                    diameterList = []
             self.img_count+=1
+            #     Z_median = []
+            #     Z = (fx2 * objectDiameter)/(i[2])
+            #     # F = (i[2] * 60)/38
+            #     # print(F)
+            #     D = (38*F)/i[2]
+            #     # print(D)
+            #     if(self.img_count < 16):
+            #         Z_median.append(Z)
+            #         if(self.img_count == 15):
+            #             Z = np.average(Z_median)
+            #             waterHeight = cameraHeight-Z
+            #             print(D)
+            #             waterStatus = "Safe" if Z > cameraHeight else "Not Safe"
+            #             self.firebase.updateWaterHeight(waterHeight, cameraHeight, Z, objectDiameter, waterStatus)
+            #     else:
+            #         self.img_count = 0
+            #         Z_median = []
+            # self.img_count+=1
             
-        except:
+        except Exception as e:
+            print(e)
             print("no circle")
         # Draw the circles
 
