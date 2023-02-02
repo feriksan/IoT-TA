@@ -42,6 +42,7 @@ class getMasking:
         u_v = cv2.getTrackbarPos("U - V", "TrackBars")
         
         F = 45.78947368421053
+        FinMM = 12.393640349315788
         fx2 = 1178.473863782612
         fx = 943.8170126557516
         fy = 899.3625747289594
@@ -87,15 +88,17 @@ class getMasking:
                 cv2.circle(result,(i[0],i[1]),2,(0,0,255),3)
                 diameterList = []
                 diameterMean = 0
+                # print(i[0])
                 if(self.img_count < 16):
                     diameterList.append(i[2])
                     if(self.img_count == 15):
                         diameterMean = np.average(diameterList)
-                        D = (38*F)/diameterMean
+                        diameterInMM = diameterMean * 0.2645833333
+                        D = (38*FinMM)/diameterInMM
                         waterHeight = cameraHeight-D
                         if(waterHeight < 0):
                             waterHeight = 0
-                        print(waterHeight)
+                        print(D+(3.8/2))
                         waterStatus = "Safe" if waterHeight <= cameraHeight/2 else "Not Safe"
                         self.firebase.updateWaterHeight(waterHeight, cameraHeight, D, objectDiameter, waterStatus)
                         # file.write(str(D) + "," + str(diameterMean) + "," + str(waterHeight) +  "," +  contentTrue + "," +  cameraDistanceTrue + "\n")
