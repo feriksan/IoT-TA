@@ -36,9 +36,17 @@ while(True):
     try:
         cv2.circle(result,(320,240),2,(0,0,255),3)
         cv2.circle(result,(320,340),2,(0,0,255),3)
-        cv2.circle(result,(320,140),2,(0,0,255),3)
+        # cv2.circle(result,(320,140),2,(0,0,255),3)
         cv2.circle(result,(220,240),2,(0,0,255),3)
         cv2.circle(result,(420,240),2,(0,0,255),3)
+        cv2.circle(result,(600,240),2,(0,0,255),3)
+        cv2.circle(result,(40,240),2,(0,0,255),3)
+        cv2.circle(result,(320,440),2,(0,0,255),3)
+        # cv2.circle(result,(320,40),2,(0,0,255),3)
+        cv2.circle(result,(520,380),2,(0,0,255),3)
+        # cv2.circle(result,(520,100),2,(0,0,255),3)
+        cv2.circle(result,(120,380),2,(0,0,255),3)
+        # cv2.circle(result,(120,100),2,(0,0,255),3)
         circles = np.uint16(np.around(circles))
         for i in circles[0,:]:
             # draw the outer circle
@@ -47,7 +55,7 @@ while(True):
             cv2.circle(result,(i[0],i[1]),2,(0,0,255),3)
             print(i[2])
             img_count+=1
-            cv2.imwrite("public/image/miring/20cm%d.png"%(img_count),frame)
+            # cv2.imwrite("public/image/20Derajat/9_%d.png"%(img_count),frame)
     except:
         print("no circle")
     # Draw the circles
@@ -57,7 +65,7 @@ while(True):
     if(cv2.waitKey(1) & 0xFF == ord('q')):
         videoCaptureObject.release()
         cv2.destroyAllWindows()
-    elif(img_count == 10):
+    elif(img_count == 20):
         print("haio")
-        videoCaptureObject.release()
-        cv2.destroyAllWindows()
+        # videoCaptureObject.release()
+        # cv2.destroyAllWindows()

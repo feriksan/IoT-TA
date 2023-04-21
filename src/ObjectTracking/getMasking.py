@@ -3,6 +3,7 @@ import numpy as np
 from Firebase.firebaseConnect import FirebaseConnect
 import time
 import atexit
+import math
 
 x = 0
 y = 0
@@ -98,8 +99,27 @@ class getMasking:
                         waterHeight = cameraHeight-D
                         if(waterHeight < 0):
                             waterHeight = 0
-                        print(D+(3.8/2))
-                        waterStatus = "Safe" if waterHeight <= cameraHeight/2 else "Not Safe"
+                        # print(D)
+                        # perpindahan = i[0] - 320
+                        # print("perpindahan", perpindahan)
+                        # perpindahanMM = perpindahan * 0.2645833333
+                        # print("perpindahan riil", perpindahanMM)
+                        # tan = perpindahanMM/FinMM
+                        print("Jarak Didapat", D)
+                        # sudutSebenarnya = 90 - tan - 40
+                        # print(sudutSebenarnya)
+                        # angle1 = math.radians(sudutSebenarnya)
+                        # jarakSebenarnya = (D+(3.8/2)) * math.sin(angle1)
+                        # print(jarakSebenarnya)
+                        # print(jarakSebenarnya)
+                        if(waterHeight > cameraHeight*0.8):
+                            waterStatus = "Siaga 1"
+                        elif(waterHeight <= cameraHeight*0.8 and waterHeight >= cameraHeight*0.7):
+                            waterHeight = "Siaga 2"
+                        elif(waterHeight <= cameraHeight*0.7 and waterHeight >= cameraHeight*0.5):
+                            waterHeight = "Siaga 3"
+                        elif(waterHeight <= cameraHeight*0.5):
+                            waterHeight = "Aman"
                         self.firebase.updateWaterHeight(waterHeight, cameraHeight, D, objectDiameter, waterStatus)
                         # file.write(str(D) + "," + str(diameterMean) + "," + str(waterHeight) +  "," +  contentTrue + "," +  cameraDistanceTrue + "\n")
                         # file.close()
