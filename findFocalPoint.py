@@ -6,6 +6,7 @@ img_count = 0
 jarak_diuji = 20
 diameter_objek = 38
 diameter_objek2 = 109.8
+pixelToMM = 0.2645833333
 
 
 while(True):
@@ -33,7 +34,7 @@ while(True):
     result = cv2.bitwise_and(frame, frame, mask=mask)
     img_gray = cv2.cvtColor(result,cv2.COLOR_BGR2GRAY)
     blur_image = cv2.GaussianBlur(img_gray, (3, 3), 1)
-    edges = cv2.Canny(img_gray,100,200)
+    edges = cv2.Canny(blur_image,100,200)
 
     # Apply Hough transform to greyscale image
     circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,w,
@@ -45,7 +46,8 @@ while(True):
             cv2.circle(result,(i[0],i[1]),i[2],(0,255,0),2)
             # draw the center of the circle
             cv2.circle(result,(i[0],i[1]),2,(0,0,255),3)
-            F = (i[2] * jarak_diuji)/diameter_objek
+            imageDiameterInMM = i[2] * pixelToMM
+            F = (imageDiameterInMM * jarak_diuji)/diameter_objek
             F_Mean = []
             if(img_count < 16):
                 F_Mean.append(F)

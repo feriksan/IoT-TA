@@ -1,1 +1,9 @@
 /blurImage
+/public
+/public/image
+*.jpg
+/foundImage
+/foundImage2
+/foundImage3
+/calibrateImage
+/calibrateImage2
