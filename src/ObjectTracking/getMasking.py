@@ -41,7 +41,7 @@ class getMasking:
         cx = 485.1822284643787
         cy = 273.7921446374951
 
-        cameraHeight = 30
+        cameraHeight = 20
         objectDiameter = 0.038
 
 
@@ -84,11 +84,12 @@ class getMasking:
                     diameterList.append(i[2])
                     if(self.img_count == 15):
                         diameterMean = np.average(diameterList)
-                        D = (38*F)/diameterMean
+                        D = (24.8*F)/diameterMean
+                        print(D)
                         waterHeight = cameraHeight-D
                         if(waterHeight < 0):
                             waterHeight = 0
-                        print(waterHeight)
+                        #print(waterHeight)
                         waterStatus = "Safe" if waterHeight <= cameraHeight/2 else "Not Safe"
                         self.firebase.updateWaterHeight(waterHeight, cameraHeight, D, objectDiameter, waterStatus)
                         # file.write(str(D) + "," + str(diameterMean) + "," + str(waterHeight) +  "," +  contentTrue + "," +  cameraDistanceTrue + "\n")
