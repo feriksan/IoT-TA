@@ -8,4 +8,4 @@
 /calibrateImage
 /calibrateImage2
 /__pycache__
-*.pcy
+*.pyc
