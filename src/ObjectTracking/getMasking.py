@@ -157,7 +157,7 @@ class getMasking:
     def startVideo(self):
         cap =  cv2.VideoCapture(0)
         # self.createWindows()
-        self.firebase.listenData()
+        self.firebase.loadConfig()
         while True:
             self.videoTracking(cap)
             key = cv2.waitKey(1)
