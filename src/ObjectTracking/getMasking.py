@@ -43,7 +43,7 @@ class getMasking:
         cx = 485.1822284643787
         cy = 273.7921446374951
 
-        cameraHeight = 30
+        cameraHeight = 40
         objectDiameter = 0.038
 
 
@@ -98,22 +98,26 @@ class getMasking:
                         # perpindahanMM = perpindahan * 0.2645833333
                         # print("perpindahan riil", perpindahanMM)
                         # tan = perpindahanMM/FinMM
-                        print("Jarak Didapat", D)
+                        # print("Jarak Didapat", D)
                         # sudutSebenarnya = 90 - tan - 40
                         # print(sudutSebenarnya)
                         # angle1 = math.radians(sudutSebenarnya)
                         # jarakSebenarnya = (D+(3.8/2)) * math.sin(angle1)
                         # print(jarakSebenarnya)
                         # print(jarakSebenarnya)
-                        if(waterHeight > cameraHeight*0.8):
+                        waterStatus = ""
+                        if(waterHeight > (cameraHeight-10) * 0.8):
                             waterStatus = "Siaga 1"
-                        elif(waterHeight <= cameraHeight*0.8 and waterHeight >= cameraHeight*0.7):
-                            waterHeight = "Siaga 2"
-                        elif(waterHeight <= cameraHeight*0.7 and waterHeight >= cameraHeight*0.5):
-                            waterHeight = "Siaga 3"
-                        elif(waterHeight <= cameraHeight*0.5):
-                            waterHeight = "Aman"
-                        self.firebase.updateWaterHeight(waterHeight, D, objectDiameter, waterStatus)
+                        elif(waterHeight <= (cameraHeight-10) * 0.8 and waterHeight >= (cameraHeight-10) * 0.7):
+                            waterStatus = "Siaga 2"
+                        elif(waterHeight <= (cameraHeight-10) * 0.7 and waterHeight >= (cameraHeight-10) * 0.5):
+                            waterStatus = "Siaga 3"
+                        elif(waterHeight <= (cameraHeight-10) * 0.5):
+                            waterStatus = "Aman"
+                        print((cameraHeight-10) * 0.8, (cameraHeight-10) * 0.7)
+                        print((cameraHeight-10) * 0.7, (cameraHeight-10) * 0.5)
+                        print((cameraHeight-10) * 0.5)
+                        self.firebase.updateWaterHeight(waterHeight, D, waterStatus)
                         # file.write(str(D) + "," + str(diameterMean) + "," + str(waterHeight) +  "," +  contentTrue + "," +  cameraDistanceTrue + "\n")
                         # file.close()
                 else:
@@ -140,6 +144,7 @@ class getMasking:
             # self.img_count+=1
             
         except Exception as e:
+            print(e)
             print("no circle")
         # Draw the circles
 
