@@ -4,6 +4,10 @@ from Firebase.firebaseConnect import FirebaseConnect
 import time
 import atexit
 import math
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 x = 0
 y = 0
@@ -34,6 +38,8 @@ class getMasking:
         Gaussian = cv2.GaussianBlur(frame, (7, 7), 0)
 
         hsv = cv2.cvtColor(Gaussian, cv2.COLOR_BGR2HSV)
+        CAMERAHEIGHT = os.getenv('CAMERA_HEIGHT')
+        OBJECT_DIAMETER = os.getenv('OBJECT_DIAMETER')
         
         F = 45.78947368421053
         FinMM = 12.393640349315788
@@ -43,8 +49,8 @@ class getMasking:
         cx = 485.1822284643787
         cy = 273.7921446374951
 
-        cameraHeight = 40
-        objectDiameter = 0.038
+        cameraHeight = int(CAMERAHEIGHT)
+        objectDiameter = int(OBJECT_DIAMETER)
 
 
         lower_blue = np.array([0, 0, 0])
@@ -88,7 +94,7 @@ class getMasking:
                     if(self.img_count == 15):
                         diameterMean = np.average(diameterList)
                         diameterInMM = diameterMean * 0.2645833333
-                        D = (38*FinMM)/diameterInMM
+                        D = (objectDiameter*FinMM)/diameterInMM
                         waterHeight = cameraHeight-D
                         if(waterHeight < 0):
                             waterHeight = 0
@@ -154,6 +160,7 @@ class getMasking:
     def startVideo(self):
         cap =  cv2.VideoCapture(0)
         # self.createWindows()
+        self.firebase.listenData()
         while True:
             self.videoTracking(cap)
             key = cv2.waitKey(1)

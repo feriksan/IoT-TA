@@ -22,8 +22,19 @@ class FirebaseConnect:
 		sensorData = ref.get()
 		for key, value in sensorData.items():
 			data = ref.child(key).get()
-			print(data)
+			if(data['sensorNo'] == '1'):
+				print(data)
 
+	def stream_handler(self, message): # put
+		print(message.data)
+		os.environ['SATUAN'] = message.data['satuan']
+		os.environ['CAMERA_HEIGHT'] = message.data['cameraHeight']
+		os.environ['OBJECT_DIAMETER'] = message.data['ballDiameter']
+
+	def listenData(self):
+		ref = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/staticParameter")
+		my_stream = ref.listen(self.stream_handler)
+	
 	def updateWaterHeight(self, val, objectToCamera, waterStatus):
 		ref = db.reference("/API/WaterControll")
 		sensorData = ref.get()
