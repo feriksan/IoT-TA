@@ -7,4 +7,5 @@
 /foundImage3
 /calibrateImage
 /calibrateImage2
-__pycache
+/__pycache__
+*.pcy
