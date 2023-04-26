@@ -34,13 +34,6 @@ class getMasking:
         Gaussian = cv2.GaussianBlur(frame, (7, 7), 0)
 
         hsv = cv2.cvtColor(Gaussian, cv2.COLOR_BGR2HSV)
-
-        l_h = cv2.getTrackbarPos("L - H", "TrackBars")
-        l_s = cv2.getTrackbarPos("L - S", "TrackBars")
-        l_v = cv2.getTrackbarPos("L - V", "TrackBars")
-        u_h = cv2.getTrackbarPos("U - H", "TrackBars")
-        u_s = cv2.getTrackbarPos("U - S", "TrackBars")
-        u_v = cv2.getTrackbarPos("U - V", "TrackBars")
         
         F = 45.78947368421053
         FinMM = 12.393640349315788
