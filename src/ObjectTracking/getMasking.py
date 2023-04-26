@@ -120,9 +120,7 @@ class getMasking:
                             waterStatus = "Siaga 3"
                         elif(waterHeight <= (cameraHeight-10) * 0.5):
                             waterStatus = "Aman"
-                        print((cameraHeight-10) * 0.8, (cameraHeight-10) * 0.7)
-                        print((cameraHeight-10) * 0.7, (cameraHeight-10) * 0.5)
-                        print((cameraHeight-10) * 0.5)
+                        print("JARAK", D)
                         self.firebase.updateWaterHeight(waterHeight, D, waterStatus)
                         # file.write(str(D) + "," + str(diameterMean) + "," + str(waterHeight) +  "," +  contentTrue + "," +  cameraDistanceTrue + "\n")
                         # file.close()
@@ -150,7 +148,6 @@ class getMasking:
             # self.img_count+=1
             
         except Exception as e:
-            print(e)
             print("no circle")
         # Draw the circles
 
