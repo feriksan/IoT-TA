@@ -120,7 +120,7 @@ class getMasking:
                             waterHeight = "Siaga 3"
                         elif(waterHeight <= cameraHeight*0.5):
                             waterHeight = "Aman"
-                        self.firebase.updateWaterHeight(waterHeight, cameraHeight, D, objectDiameter, waterStatus)
+                        self.firebase.updateWaterHeight(waterHeight, D, objectDiameter, waterStatus)
                         # file.write(str(D) + "," + str(diameterMean) + "," + str(waterHeight) +  "," +  contentTrue + "," +  cameraDistanceTrue + "\n")
                         # file.close()
                 else:
