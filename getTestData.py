@@ -10,12 +10,12 @@ cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
 url = 'http://192.168.174.209/capture'
 cv2.namedWindow("TrackBars")
 
-cv2.createTrackbar("L - H", "TrackBars", 0, 255, nothing)
-cv2.createTrackbar("L - S", "TrackBars", 0, 255, nothing)
-cv2.createTrackbar("L - V", "TrackBars", 0, 255, nothing)
-cv2.createTrackbar("U - H", "TrackBars", 255, 255, nothing)
-cv2.createTrackbar("U - S", "TrackBars", 255, 255, nothing)
-cv2.createTrackbar("U - V", "TrackBars", 255, 255, nothing)
+cv2.createTrackbar("L - H", "TrackBars", 255, 255, nothing)
+cv2.createTrackbar("L - S", "TrackBars", 255, 255, nothing)
+cv2.createTrackbar("L - V", "TrackBars", 255, 255, nothing)
+cv2.createTrackbar("U - H", "TrackBars", 0, 255, nothing)
+cv2.createTrackbar("U - S", "TrackBars", 0, 255, nothing)
+cv2.createTrackbar("U - V", "TrackBars", 0, 255, nothing)
 
 object_detector = cv2.createBackgroundSubtractorMOG2()
 x_array = []
@@ -26,6 +26,7 @@ img_count = 0
 while True:
     _, frame = cap.read()
     # Gaussian Blur
+    cv2.imshow("result", frame)
     Gaussian = cv2.GaussianBlur(frame, (7, 7), 0)
 
     hsv = cv2.cvtColor(Gaussian, cv2.COLOR_BGR2HSV)
@@ -44,12 +45,11 @@ while True:
     cameraDistanceTrue = "59"
 
 
-    # lower_blue = np.array([0, 60, 60])
-    # upper_blue = np.array([255, 255, 255])
+    lower_blue = np.array([0, 67, 27])
+    upper_blue = np.array([71, 245, 255])
 
-    lower_blue = np.array([l_h, l_s, l_v])
-    upper_blue = np.array([u_h, u_s, u_v])
-
+    # lower_blue = np.array([l_h, l_s, l_v])
+    # upper_blue = np.array([u_h, u_s, u_v])
 
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
     contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -73,8 +73,8 @@ while True:
     try:
         print(w)
             # Apply Hough transform to greyscale image
-        circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,640,
-                            param1=90,param2=50,minRadius=30,maxRadius=177)
+        circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1.1,w,
+                            param1=100,param2=40,minRadius=30,maxRadius=177)
         circles = np.uint16(np.around(circles))
         for i in circles[0,:]:
             # draw the outer circle
@@ -124,9 +124,9 @@ while True:
     except Exception as e:
         print("no circle")
     # Draw the circles
-
+    cv2.imshow("HSV", hsv)
     cv2.imshow("mask", mask)
-    cv2.imshow("result", result)
+    # cv2.imshow("result", frame)
     
     key = cv2.waitKey(1)
     if key == 27:
