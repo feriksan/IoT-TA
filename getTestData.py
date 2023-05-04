@@ -10,10 +10,10 @@ cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
 url = 'http://192.168.174.209/capture'
 cv2.namedWindow("TrackBars")
 
-cv2.createTrackbar("L - H", "TrackBars", 0, 179, nothing)
+cv2.createTrackbar("L - H", "TrackBars", 0, 255, nothing)
 cv2.createTrackbar("L - S", "TrackBars", 0, 255, nothing)
 cv2.createTrackbar("L - V", "TrackBars", 0, 255, nothing)
-cv2.createTrackbar("U - H", "TrackBars", 179, 179, nothing)
+cv2.createTrackbar("U - H", "TrackBars", 255, 255, nothing)
 cv2.createTrackbar("U - S", "TrackBars", 255, 255, nothing)
 cv2.createTrackbar("U - V", "TrackBars", 255, 255, nothing)
 
@@ -44,8 +44,11 @@ while True:
     cameraDistanceTrue = "59"
 
 
-    lower_blue = np.array([0, 0, 0])
-    upper_blue = np.array([255, 255, 255])
+    # lower_blue = np.array([0, 60, 60])
+    # upper_blue = np.array([255, 255, 255])
+
+    lower_blue = np.array([l_h, l_s, l_v])
+    upper_blue = np.array([u_h, u_s, u_v])
 
 
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
@@ -65,12 +68,13 @@ while True:
     result = cv2.bitwise_and(frame, frame, mask=mask)
     # Convert to greyscale
     img_gray = cv2.cvtColor(result,cv2.COLOR_BGR2GRAY)
-    blur_image = cv2.GaussianBlur(img_gray, (3, 3), 1)
+    blur_image = cv2.GaussianBlur(img_gray, (7, 7), 1)
 
-    # Apply Hough transform to greyscale image
-    circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,w,
-                        param1=90,param2=50,minRadius=0,maxRadius=0)
     try:
+        print(w)
+            # Apply Hough transform to greyscale image
+        circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,640,
+                            param1=90,param2=50,minRadius=30,maxRadius=177)
         circles = np.uint16(np.around(circles))
         for i in circles[0,:]:
             # draw the outer circle
@@ -121,7 +125,7 @@ while True:
         print("no circle")
     # Draw the circles
 
-    # cv2.imshow("mask", mask)
+    cv2.imshow("mask", mask)
     cv2.imshow("result", result)
     
     key = cv2.waitKey(1)

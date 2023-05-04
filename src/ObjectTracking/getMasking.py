@@ -53,7 +53,10 @@ class getMasking:
         objectDiameter = int(OBJECT_DIAMETER)
 
 
-        lower_blue = np.array([0, 0, 0])
+        # lower_blue = np.array([0, 0, 0])
+        # upper_blue = np.array([255, 255, 255])
+
+        lower_blue = np.array([0, 60, 60])
         upper_blue = np.array([255, 255, 255])
 
 
@@ -78,7 +81,7 @@ class getMasking:
 
         # Apply Hough transform to greyscale image
         circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,w,
-                            param1=90,param2=50,minRadius=0,maxRadius=0)
+                            param1=90,param2=50,minRadius=30,maxRadius=177)
         try:
             circles = np.uint16(np.around(circles))
             for i in circles[0,:]:
