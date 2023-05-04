@@ -80,7 +80,7 @@ class getMasking:
         blur_image = cv2.GaussianBlur(img_gray, (3, 3), 1)
 
         # Apply Hough transform to greyscale image
-        circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,w,
+        circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,640,
                             param1=90,param2=50,minRadius=30,maxRadius=177)
         try:
             circles = np.uint16(np.around(circles))
