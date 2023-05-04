@@ -56,8 +56,8 @@ class getMasking:
         # lower_blue = np.array([0, 0, 0])
         # upper_blue = np.array([255, 255, 255])
 
-        lower_blue = np.array([0, 46, 79])
-        upper_blue = np.array([255, 255, 255])
+        lower_blue = np.array([0, 67, 27])
+        upper_blue = np.array([71, 245, 255])
 
 
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
@@ -80,9 +80,9 @@ class getMasking:
         blur_image = cv2.GaussianBlur(img_gray, (3, 3), 1)
 
         # Apply Hough transform to greyscale image
-        circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,w,
-                            param1=90,param2=50,minRadius=30,maxRadius=177)
         try:
+            circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1.1,w,
+                            param1=100,param2=40,minRadius=30,maxRadius=177)
             circles = np.uint16(np.around(circles))
             for i in circles[0,:]:
                 # draw the outer circle

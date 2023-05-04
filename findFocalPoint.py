@@ -3,7 +3,7 @@ import numpy as np
 
 videoCaptureObject = cv2.VideoCapture(0)
 img_count = 0
-jarak_diuji = 20
+jarak_diuji = 50
 diameter_objek = 38
 diameter_objek2 = 109.8
 pixelToMM = 0.2645833333
@@ -11,8 +11,8 @@ pixelToMM = 0.2645833333
 
 while(True):
     ret,frame = videoCaptureObject.read()
-    lower_blue = np.array([0, 0, 0])
-    upper_blue = np.array([255, 255, 255])
+    lower_blue = np.array([0, 67, 27])
+    upper_blue = np.array([71, 245, 255])
 
     Gaussian = cv2.GaussianBlur(frame, (7, 7), 0)
 
