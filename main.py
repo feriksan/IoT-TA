@@ -1,6 +1,5 @@
 from src.ObjectTracking.getMasking import getMasking
-from Firebase.firebaseConnect import FirebaseConnect
-import cv2
+
 # from src.TcpClient import tcpClient
 
 # firebase = FirebaseConnect()
@@ -8,6 +7,8 @@ import cv2
 # firebase.readData()
 # firebase.deleteSensorData(0)
 # cap =  cv2.VideoCapture(0)
+
+# Control Program
+
 getMask = getMasking()
-video = getMask.startVideo()
-video()
+getMask.startVideo()

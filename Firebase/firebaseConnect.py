@@ -1,6 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+import re
 import os
 
 class FirebaseConnect:
@@ -11,6 +12,9 @@ class FirebaseConnect:
 			'databaseURL':'https://iot-ta-cacb8-default-rtdb.asia-southeast1.firebasedatabase.app/'
 			})
 		default_app
+
+		self.refMasking = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/maskingConfig")
+		self.refSensorConfig = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/staticParameter")
 	
 	def addSensor(self, sensor):
 		ref = db.reference("/API/WaterControll")
@@ -27,22 +31,38 @@ class FirebaseConnect:
 				os.environ['SATUAN'] = data['staticParameter']['satuan']
 				os.environ['CAMERA_HEIGHT'] = data['staticParameter']['cameraHeight']
 				os.environ['OBJECT_DIAMETER'] = data['staticParameter']['ballDiameter']
-				
-	def stream_handler(self, message): # put
-		print(message.data)
-		os.environ['SATUAN'] = message.data['satuan']
-		os.environ['CAMERA_HEIGHT'] = message.data['cameraHeight']
-		os.environ['OBJECT_DIAMETER'] = message.data['ballDiameter']
+	
+	def stopListening(self):
+		self.MaskingListen.close()
+		self.ConfigListen.close()
+
+	def MaskingHandler(self, event):
+		firePath = event.path
+		fireSplit = firePath.replace("/", "")
+		if(fireSplit != ""):
+			envPath = re.split("(?<=.)(?=[A-Z])", fireSplit)
+			path = "_".join(envPath)
+			upperPath = path.upper()
+			os.environ[upperPath] = event.data
+
+	def ConfigHandler(self, event):
+		firePath = event.path
+		fireSplit = firePath.replace("/", "")
+		if(fireSplit != ""):
+			envPath = re.split("(?<=.)(?=[A-Z])", fireSplit)
+			path = "_".join(envPath)
+			upperPath = path.upper()
+			os.environ[upperPath] = event.data
+			
 
 	def listenData(self):
-		ref = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/staticParameter")
-		my_stream = ref.listen(self.stream_handler)
+		self.MaskingListen = self.refMasking.listen(self.MaskingHandler)
+		self.ConfigListen = self.refSensorConfig.listen(self.ConfigHandler)
 	
 	def updateWaterHeight(self, val, objectToCamera, waterStatus):
 		ref = db.reference("/API/WaterControll")
 		sensorData = ref.get()
 		dataSend = str(val)
-		print(dataSend)
 		for key, value in sensorData.items():
 			data = ref.child(key).get()
 			# Set Sensor ID
@@ -53,7 +73,8 @@ class FirebaseConnect:
 						},
 						"waterHeight":dataSend,
 						"status":{
-							"waterStatus": waterStatus	
+							"waterStatus": waterStatus	,
+							"waterHeight":dataSend,
 						}
 					})
 

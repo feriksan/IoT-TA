@@ -39,7 +39,23 @@ class getMasking:
 
         hsv = cv2.cvtColor(Gaussian, cv2.COLOR_BGR2HSV)
         CAMERAHEIGHT = os.getenv('CAMERA_HEIGHT')
-        OBJECT_DIAMETER = os.getenv('OBJECT_DIAMETER')
+        BALL_DIAMETER = os.getenv('BALL_DIAMETER')
+        UPPER_HUE = os.getenv('UPPER_HUE')
+        UPPER_SATURATION = os.getenv('UPPER_SATURATION')
+        UPPER_VALUE = os.getenv('UPPER_VALUE')
+        LOWER_HUE = os.getenv('LOWER_HUE')
+        LOWER_SATURATION = os.getenv('LOWER_SATURATION')
+        LOWER_VALUE = os.getenv('LOWER_VALUE')
+        FOCAL_LENGHT = os.getenv('FOCAL_LENGHT')
+        print("CAMERA HEIGHT: " + CAMERAHEIGHT)
+        print("BALL DIAMETER: " + BALL_DIAMETER)
+        print("UPPER HUE: " + UPPER_HUE)
+        print("LOWER HUE: " + LOWER_HUE)
+        print("UPPER SATURATION: " + UPPER_SATURATION)
+        print("UPPER VALUE: " + UPPER_VALUE)
+        print("LOWER SATURATION: " + LOWER_SATURATION)
+        print("LOWER VALUE: " + LOWER_VALUE)
+        print("FOCAL LENGHT: " + FOCAL_LENGHT)
         
         F = 45.78947368421053
         FinMM = 12.393640349315788
@@ -50,17 +66,22 @@ class getMasking:
         cy = 273.7921446374951
 
         cameraHeight = int(CAMERAHEIGHT)
-        objectDiameter = int(OBJECT_DIAMETER)
+        objectDiameter = int(BALL_DIAMETER)
 
 
         # lower_blue = np.array([0, 0, 0])
         # upper_blue = np.array([255, 255, 255])
 
-        lower_blue = np.array([0, 67, 27])
-        upper_blue = np.array([71, 245, 255])
+        # lower_red = np.array([0, 19, 43])
+        # upper_red = np.array([26, 255, 152])
 
+        # lower_blue = np.array([0, 67, 27])
+        # upper_blue = np.array([71, 245, 255])
 
-        mask = cv2.inRange(hsv, lower_blue, upper_blue)
+        lower_hsv = np.array([int(LOWER_HUE), int(LOWER_SATURATION), int(LOWER_VALUE)])
+        upper_hsv = np.array([int(UPPER_HUE), int(UPPER_SATURATION), int(UPPER_VALUE)])
+        
+        mask = cv2.inRange(hsv, lower_hsv, upper_hsv)
         contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
         #looping for contours
@@ -115,6 +136,7 @@ class getMasking:
                         # print(jarakSebenarnya)
                         # print(jarakSebenarnya)
                         waterStatus = ""
+                        print(cameraHeight)
                         if(waterHeight > (cameraHeight-10) * 0.8):
                             waterStatus = "Siaga 1"
                         elif(waterHeight <= (cameraHeight-10) * 0.8 and waterHeight >= (cameraHeight-10) * 0.7):
@@ -124,6 +146,10 @@ class getMasking:
                         elif(waterHeight <= (cameraHeight-10) * 0.5):
                             waterStatus = "Aman"
                         print("JARAK", D)
+                        print("Siaga 1", (cameraHeight-10) * 0.8)
+                        print("Siaga 2", (cameraHeight-10) * 0.8, " - ", (cameraHeight-10) * 0.7)
+                        print("Siaga 3", (cameraHeight-10) * 0.7, " - ", (cameraHeight-10) * 0.5)
+                        print("Aman", (cameraHeight-10) * 0.5)
                         self.firebase.updateWaterHeight(waterHeight, D, waterStatus)
                         # file.write(str(D) + "," + str(diameterMean) + "," + str(waterHeight) +  "," +  contentTrue + "," +  cameraDistanceTrue + "\n")
                         # file.close()
@@ -159,8 +185,13 @@ class getMasking:
 
     def startVideo(self):
         cap =  cv2.VideoCapture(0)
+        width = 1920
+        height = 1080
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
         # self.createWindows()
-        self.firebase.loadConfig()
+        # self.firebase.loadConfig()
+        self.firebase.listenData()
         while True:
             self.videoTracking(cap)
             key = cv2.waitKey(1)
@@ -168,6 +199,7 @@ class getMasking:
                 break
         cap.release()
         cv2.destroyAllWindows()
+        self.firebase.stopListening()
     
     def exit_handler(self):
     # do this stuff when the script exits

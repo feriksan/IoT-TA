@@ -2,8 +2,12 @@ import cv2
 import numpy as np
 
 videoCaptureObject = cv2.VideoCapture(0)
+width = 1280
+height = 720
+videoCaptureObject.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+videoCaptureObject.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 img_count = 0
-jarak_diuji = 50
+jarak_diuji = 20
 diameter_objek = 38
 diameter_objek2 = 109.8
 pixelToMM = 0.2645833333
@@ -11,8 +15,8 @@ pixelToMM = 0.2645833333
 
 while(True):
     ret,frame = videoCaptureObject.read()
-    lower_blue = np.array([0, 67, 27])
-    upper_blue = np.array([71, 245, 255])
+    lower_blue = np.array([0, 0, 0])
+    upper_blue = np.array([255, 255, 255])
 
     Gaussian = cv2.GaussianBlur(frame, (7, 7), 0)
 
@@ -38,7 +42,7 @@ while(True):
 
     # Apply Hough transform to greyscale image
     circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,w,
-                        param1=90,param2=50,minRadius=0,maxRadius=0)
+                        param1=90,param2=50,minRadius=44,maxRadius=256)
     try:
         circles = np.uint16(np.around(circles))
         for i in circles[0,:]:

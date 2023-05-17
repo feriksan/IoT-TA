@@ -2,6 +2,10 @@ import cv2
 import numpy as np
 
 videoCaptureObject = cv2.VideoCapture(0)
+width = 1280
+height = 720
+videoCaptureObject.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+videoCaptureObject.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 img_count = 0
 while(True):
     ret,frame = videoCaptureObject.read()
@@ -27,12 +31,12 @@ while(True):
 
     result = cv2.bitwise_and(frame, frame, mask=mask)
     img_gray = cv2.cvtColor(result,cv2.COLOR_BGR2GRAY)
-    blur_image = cv2.GaussianBlur(img_gray, (3, 3), 1)
+    blur_image = cv2.GaussianBlur(img_gray, (5, 5), 1)
     edges = cv2.Canny(blur_image,100,200)
     # print(frame.shape[0])
     # Apply Hough transform to greyscale image
-    circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1,w,
-                        param1=90,param2=50,minRadius=0,maxRadius=0)
+    circles = cv2.HoughCircles(blur_image,cv2.HOUGH_GRADIENT,1.4,w,
+                        param1=100,param2=50,minRadius=44,maxRadius=256)
     try:
         cv2.circle(result,(320,240),2,(0,0,255),3)
         cv2.circle(result,(320,340),2,(0,0,255),3)
@@ -55,17 +59,18 @@ while(True):
             cv2.circle(result,(i[0],i[1]),2,(0,0,255),3)
             print(i[2])
             img_count+=1
-            # cv2.imwrite("public/image/20Derajat/9_%d.png"%(img_count),frame)
+            cv2.imwrite("public/image/720Image/43_%d.png"%(img_count),frame)
     except:
         print("no circle")
-    # Draw the circles
+    # Draw the circlesblur_image
+    cv2.imshow("blur", blur_image)
     cv2.imshow("mask", result)
-    cv2.imshow("Canny", edges)
+    # cv2.imshow("Canny", edges)
 
     if(cv2.waitKey(1) & 0xFF == ord('q')):
         videoCaptureObject.release()
         cv2.destroyAllWindows()
     elif(img_count == 20):
         print("haio")
-        # videoCaptureObject.release()
-        # cv2.destroyAllWindows()
+        videoCaptureObject.release()
+        cv2.destroyAllWindows()

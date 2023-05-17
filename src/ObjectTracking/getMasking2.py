@@ -17,8 +17,11 @@ ap.add_argument("-b", "--buffer", type=int, default=64,
 	help="max buffer size")
 args = vars(ap.parse_args())
 
-greenLower = (0, 24, 23)
-greenUpper = (22, 255, 255)
+# greenLower = (0, 24, 23)
+# greenUpper = (22, 255, 255)
+
+greenLower = np.array([0, 19, 43])
+greenUpper = np.array([26, 255, 152])
 
 fx = 943.8170126557516
 fy = 899.3625747289594
