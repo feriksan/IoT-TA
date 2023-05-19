@@ -12,12 +12,12 @@ async def transmit(websocket):
         _, frame = cap.read()
 
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        UPPER_HUE = os.getenv('UPPER_HUE')
-        UPPER_SATURATION = os.getenv('UPPER_SATURATION')
-        UPPER_VALUE = os.getenv('UPPER_VALUE')
-        LOWER_HUE = os.getenv('LOWER_HUE')
-        LOWER_SATURATION = os.getenv('LOWER_SATURATION')
-        LOWER_VALUE = os.getenv('LOWER_VALUE')
+        UPPER_HUE = 255
+        UPPER_SATURATION = 255
+        UPPER_VALUE = 255
+        LOWER_HUE = 0
+        LOWER_SATURATION = 0
+        LOWER_VALUE = 0
 
         lower_hsv = np.array([int(LOWER_HUE), int(LOWER_SATURATION), int(LOWER_VALUE)])
         upper_hsv = np.array([int(UPPER_HUE), int(UPPER_SATURATION), int(UPPER_VALUE)])
