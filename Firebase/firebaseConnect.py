@@ -3,7 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 import re
 import os
-from src.ObjectTracking.getMasking import getMasking
+# from src.ObjectTracking.getMasking import getMasking
 
 class FirebaseConnect:
 	def __init__(self):
@@ -13,7 +13,7 @@ class FirebaseConnect:
 			'databaseURL':'https://iot-ta-cacb8-default-rtdb.asia-southeast1.firebasedatabase.app/'
 			})
 		default_app
-		self.runGetMasking = getMasking()
+		# self.runGetMasking = getMasking()
 		self.refMasking = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/maskingConfig")
 		self.refSensorConfig = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/staticParameter")
 		self.refSensorControll = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/sensorControll")
