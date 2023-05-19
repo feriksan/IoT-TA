@@ -33,7 +33,7 @@ async def transmit(websocket):
         cap.release()
 
 async def main():
-    async with serve(echo, "localhost", 8765):
+    async with serve(echo, "192.168.1.22", 8765):
         await asyncio.Future()  # run forever
 
 asyncio.run(main())
