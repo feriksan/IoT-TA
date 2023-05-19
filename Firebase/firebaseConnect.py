@@ -3,6 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 import re
 import os
+from src.ObjectTracking.getMasking import getMasking
 
 class FirebaseConnect:
 	def __init__(self):
@@ -12,9 +13,10 @@ class FirebaseConnect:
 			'databaseURL':'https://iot-ta-cacb8-default-rtdb.asia-southeast1.firebasedatabase.app/'
 			})
 		default_app
-
+		self.runGetMasking = getMasking()
 		self.refMasking = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/maskingConfig")
 		self.refSensorConfig = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/staticParameter")
+		self.refSensorControll = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/sensorControll")
 	
 	def addSensor(self, sensor):
 		ref = db.reference("/API/WaterControll")
@@ -53,11 +55,19 @@ class FirebaseConnect:
 			path = "_".join(envPath)
 			upperPath = path.upper()
 			os.environ[upperPath] = event.data
-			
+
+	def sensorControls(self, event):
+		if(event.data == 1):
+			self.runGetMasking.startVideo()
+		else:
+			print("HAO")
+		print(event.data)
+		return event.data
 
 	def listenData(self):
 		self.MaskingListen = self.refMasking.listen(self.MaskingHandler)
 		self.ConfigListen = self.refSensorConfig.listen(self.ConfigHandler)
+		self.SensorControl = self.refSensorControll.listen(self.sensorControls)
 	
 	def updateWaterHeight(self, val, objectToCamera, waterStatus):
 		ref = db.reference("/API/WaterControll")
