@@ -54,7 +54,7 @@ async def sendData(websocket, data):
     await websocket.send(data)
 
 async def main():
-    async with serve(transmit, "192.168.1.22", 8765):
+    async with serve(transmit, "192.168.1.18", 8765):
         await asyncio.Future()  # run forever
 
 asyncio.run(main())
