@@ -1,6 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+from models.maskingModel import MaskingModel
 import re
 import os
 # from src.ObjectTracking.getMasking import getMasking
@@ -45,6 +46,8 @@ class FirebaseConnect:
 			envPath = re.split("(?<=.)(?=[A-Z])", fireSplit)
 			path = "_".join(envPath)
 			upperPath = path.upper()
+			modelData = MaskingModel()
+			modelData.lowerHue = event.data
 			os.environ[upperPath] = event.data
 
 	def ConfigHandler(self, event):
