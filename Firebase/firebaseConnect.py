@@ -1,7 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-from models.maskingModel import MaskingModel
+import models.maskingModel as data
 import re
 import os
 # from src.ObjectTracking.getMasking import getMasking
@@ -15,7 +15,6 @@ class FirebaseConnect:
 			})
 		default_app
 		# self.runGetMasking = getMasking()
-		self.modelData = MaskingModel()
 		self.refMasking = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/maskingConfig")
 		self.refSensorConfig = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/staticParameter")
 		self.refSensorControll = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/sensorControll")
@@ -47,8 +46,8 @@ class FirebaseConnect:
 			envPath = re.split("(?<=.)(?=[A-Z])", fireSplit)
 			path = "_".join(envPath)
 			upperPath = path.upper()
-			self.modelData.lowerHue = event.data
-			print(self.modelData.lowerHue)
+			data.lowerHue = event.data
+			print(data.lowerHue)
 			# os.environ[upperPath] = event.data
 
 	def ConfigHandler(self, event):

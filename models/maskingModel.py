@@ -1,4 +1,4 @@
-class MaskingModel:
+if __name__ == '__main__':
     lowerHue = 0
     lowerSaturation = 0
     lowerValue = 0
