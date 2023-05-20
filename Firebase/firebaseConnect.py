@@ -15,6 +15,7 @@ class FirebaseConnect:
 			})
 		default_app
 		# self.runGetMasking = getMasking()
+		self.modelData = MaskingModel()
 		self.refMasking = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/maskingConfig")
 		self.refSensorConfig = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/staticParameter")
 		self.refSensorControll = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/sensorControll")
@@ -40,16 +41,14 @@ class FirebaseConnect:
 		self.ConfigListen.close()
 
 	def MaskingHandler(self, event):
-		print(event.path)
 		firePath = event.path
 		fireSplit = firePath.replace("/", "")
 		if(fireSplit != ""):
 			envPath = re.split("(?<=.)(?=[A-Z])", fireSplit)
 			path = "_".join(envPath)
 			upperPath = path.upper()
-			modelData = MaskingModel()
-			modelData.lowerHue = event.data
-			print(modelData.lowerHue)
+			self.modelData.lowerHue = event.data
+			print(self.modelData.lowerHue)
 			# os.environ[upperPath] = event.data
 
 	def ConfigHandler(self, event):
@@ -70,7 +69,6 @@ class FirebaseConnect:
 		return event.data
 
 	def listenData(self):
-		print("MASUKKKKs")
 		self.MaskingListen = self.refMasking.listen(self.MaskingHandler)
 		self.ConfigListen = self.refSensorConfig.listen(self.ConfigHandler)
 		self.SensorControl = self.refSensorControll.listen(self.sensorControls)
