@@ -48,7 +48,7 @@ class FirebaseConnect:
 			upperPath = path.upper()
 			modelData = MaskingModel()
 			modelData.lowerHue = event.data
-			os.environ[upperPath] = event.data
+			# os.environ[upperPath] = event.data
 
 	def ConfigHandler(self, event):
 		firePath = event.path
