@@ -57,5 +57,5 @@ class Websocket:
     async def main(self):
         print("Masuk main")
         async with serve(self.transmit, "192.168.1.18", 8765):
-            print("Websocket Satred")
+            print("Websocket")
             await asyncio.Future()  # run forever

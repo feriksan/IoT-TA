@@ -12,6 +12,7 @@ from websocket import Websocket
 
 # Control Program
 startWebsocket = Websocket()
-asyncio.run(startWebsocket.main())
+beginWebsocket = startWebsocket.main()
+asyncio.run(beginWebsocket())
 # getMask = getMasking()
 # getMask.startVideo()
