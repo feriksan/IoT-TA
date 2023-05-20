@@ -21,7 +21,7 @@ class Websocket:
             LOWER_SATURATION = 0
             LOWER_VALUE = 0
             hueData = MaskingModel()
-            print(hueData)
+            print(hueData.lowerHue)
             lower_hsv = np.array([int(LOWER_HUE), int(LOWER_SATURATION), int(LOWER_VALUE)])
             upper_hsv = np.array([int(UPPER_HUE), int(UPPER_SATURATION), int(UPPER_VALUE)])
             
