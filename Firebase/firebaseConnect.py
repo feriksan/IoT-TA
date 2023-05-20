@@ -40,6 +40,7 @@ class FirebaseConnect:
 		self.ConfigListen.close()
 
 	def MaskingHandler(self, event):
+		print(event.path)
 		firePath = event.path
 		fireSplit = firePath.replace("/", "")
 		if(fireSplit != ""):
@@ -69,6 +70,7 @@ class FirebaseConnect:
 		return event.data
 
 	def listenData(self):
+		print("MASUKKKKs")
 		self.MaskingListen = self.refMasking.listen(self.MaskingHandler)
 		self.ConfigListen = self.refSensorConfig.listen(self.ConfigHandler)
 		self.SensorControl = self.refSensorControll.listen(self.sensorControls)
