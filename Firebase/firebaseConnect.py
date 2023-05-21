@@ -15,7 +15,7 @@ class FirebaseConnect:
 			})
 		default_app
 		# self.runGetMasking = getMasking()
-		self.refMasking = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/maskingConfig")
+		self.refMasking = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/tempMaskingConfig")
 		self.refSensorConfig = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/staticParameter")
 		self.refSensorControll = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/sensorControll")
 	

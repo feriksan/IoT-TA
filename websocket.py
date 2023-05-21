@@ -2,7 +2,7 @@ import asyncio
 from websockets.server import serve
 import cv2, base64
 import numpy as np
-import models.maskingModel as dataAAA
+import models.maskingModel as dataMasking
 import os
 
 class Websocket:
@@ -14,14 +14,12 @@ class Websocket:
             _, frame = cap.read()
 
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            UPPER_HUE = 255
-            UPPER_SATURATION = 255
-            UPPER_VALUE = 255
-            LOWER_HUE = 0
-            LOWER_SATURATION = 0
-            LOWER_VALUE = 0
-            print("LOWER HUE DATA")
-            print(dataAAA.lowerHue)
+            UPPER_HUE = dataMasking.upperHue
+            UPPER_SATURATION = dataMasking.upperSaturation
+            UPPER_VALUE = dataMasking.upperValue
+            LOWER_HUE = dataMasking.lowerHue
+            LOWER_SATURATION = dataMasking.lowerSaturation
+            LOWER_VALUE = dataMasking.lowerValue
             lower_hsv = np.array([int(LOWER_HUE), int(LOWER_SATURATION), int(LOWER_VALUE)])
             upper_hsv = np.array([int(UPPER_HUE), int(UPPER_SATURATION), int(UPPER_VALUE)])
             
