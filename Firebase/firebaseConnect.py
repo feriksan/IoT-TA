@@ -42,6 +42,7 @@ class FirebaseConnect:
 	def MaskingHandler(self, event):
 		firePath = event.path
 		fireSplit = firePath.replace("/", "")
+		print(event.data)
 		if(fireSplit != ""):
 			envPath = re.split("(?<=.)(?=[A-Z])", fireSplit)
 			path = "_".join(envPath)
