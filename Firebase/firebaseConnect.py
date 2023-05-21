@@ -42,12 +42,13 @@ class FirebaseConnect:
 	def MaskingHandler(self, event):
 		firePath = event.path
 		fireSplit = firePath.replace("/", "")
-		print(event.data)
+		print(event.data['lowerHue'])
+		data.lowerHue = event.data['lowerHue']
 		if(fireSplit != ""):
 			envPath = re.split("(?<=.)(?=[A-Z])", fireSplit)
 			path = "_".join(envPath)
 			upperPath = path.upper()
-			data.lowerHue = event.data
+			# data.lowerHue = event.data['lowerHue']
 			print(data.lowerHue)
 			# os.environ[upperPath] = event.data
 
