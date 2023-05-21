@@ -22,6 +22,8 @@ class Websocket:
             LOWER_VALUE = dataMasking.lowerValue
             lower_hsv = np.array([int(LOWER_HUE), int(LOWER_SATURATION), int(LOWER_VALUE)])
             upper_hsv = np.array([int(UPPER_HUE), int(UPPER_SATURATION), int(UPPER_VALUE)])
+            print(lower_hsv)
+            print(upper_hsv)
             
             mask = cv2.inRange(hsv, lower_hsv, upper_hsv)
             contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
