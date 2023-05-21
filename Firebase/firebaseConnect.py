@@ -42,6 +42,7 @@ class FirebaseConnect:
 	def MaskingHandler(self, event):
 		firePath = event.path
 		fireSplit = firePath.replace("/", "")
+		print(event.data)
 		data.lowerHue = event.data['lowerHue']
 		data.lowerSaturation = event.data['lowerSaturation']
 		data.lowerValue = event.data['lowerValue']
