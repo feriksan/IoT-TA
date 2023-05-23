@@ -1,4 +1,3 @@
-
 lowerHue = 0
 lowerSaturation = 0
 lowerValue = 0
