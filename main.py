@@ -13,7 +13,8 @@ firebase.listenData()
 # cap =  cv2.VideoCapture(0)
 
 # Control Program
-startWebsocket = Websocket()
-asyncio.run(startWebsocket.main())
 getMask = getMasking()
 getMask.startVideo()
+
+startWebsocket = Websocket()
+asyncio.run(startWebsocket.main())
