@@ -16,5 +16,5 @@ firebase.listenData()
 getMask = getMasking()
 getMask.startVideo()
 
-startWebsocket = Websocket()
-asyncio.run(startWebsocket.main())
+# startWebsocket = Websocket()
+# asyncio.run(startWebsocket.main())
