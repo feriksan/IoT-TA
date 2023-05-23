@@ -13,8 +13,8 @@ import asyncio
 # cap =  cv2.VideoCapture(0)
 
 # Control Program
-getMask = getMasking()
-getMask.startVideo()
+# getMask = getMasking()
+# getMask.startVideo()
 
-# startWebsocket = Websocket()
-# asyncio.run(startWebsocket.main())
+startWebsocket = Websocket()
+asyncio.run(startWebsocket.main())
