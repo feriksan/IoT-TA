@@ -1,6 +1,7 @@
 from src.ObjectTracking.getMasking import getMasking
-import asyncio
-from websocket import Websocket
+# import asyncio
+# from websocket import Websocket
+# from multiprocessing import Process
 # from Firebase.firebaseConnect import FirebaseConnect
 
 # from src.TcpClient import tcpClient
@@ -13,8 +14,8 @@ from websocket import Websocket
 # cap =  cv2.VideoCapture(0)
 
 # Control Program
-getMask = getMasking()
+getMask = getMasking().startVideo()
 getMask.startVideo()
 
-# startWebsocket = Websocket()
-# asyncio.run(startWebsocket.main())
+# Process(target=asyncio.run(Websocket().startWebsocket.main()))
+# Process(target=getMasking().startVideo())

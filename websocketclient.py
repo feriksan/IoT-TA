@@ -1,13 +1,10 @@
 #!/usr/bin/env python
-
 import asyncio
 from websockets.sync.client import connect
 
 def hello():
-    with connect("ws://192.168.1.22:8765") as websocket:
-        # print("")
-        websocket.send("Hello world!")
+    with connect("ws://localhost:8765") as websocket:
+        websocket.send("4")
         message = websocket.recv()
         print(f"Received: {message}")
-
 hello()
