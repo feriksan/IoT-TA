@@ -25,5 +25,5 @@ class Websocket:
         print("Masuk main")
         url1 = "192.168.1.21"
         url2 = "localhost"
-        async with serve(self.startWebsocket, url2, 8765):
+        async with serve(self.startWebsocket, url1, 8765):
             await asyncio.Future()
