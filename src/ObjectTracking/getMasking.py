@@ -50,12 +50,12 @@ class getMasking:
         FOCAL_LENGHT = os.getenv('FOCAL_LENGHT')
         print("CAMERA HEIGHT: " + CAMERAHEIGHT)
         print("BALL DIAMETER: " + BALL_DIAMETER)
-        print("UPPER HUE: " + UPPER_HUE)
-        print("LOWER HUE: " + LOWER_HUE)
-        print("UPPER SATURATION: " + UPPER_SATURATION)
-        print("UPPER VALUE: " + UPPER_VALUE)
-        print("LOWER SATURATION: " + LOWER_SATURATION)
-        print("LOWER VALUE: " + LOWER_VALUE)
+        # print("UPPER HUE: " + UPPER_HUE)
+        # print("LOWER HUE: " + LOWER_HUE)
+        # print("UPPER SATURATION: " + UPPER_SATURATION)
+        # print("UPPER VALUE: " + UPPER_VALUE)
+        # print("LOWER SATURATION: " + LOWER_SATURATION)
+        # print("LOWER VALUE: " + LOWER_VALUE)
         print("FOCAL LENGHT: " + FOCAL_LENGHT)
         
         F = 45.78947368421053
