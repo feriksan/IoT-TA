@@ -49,18 +49,19 @@ class getMasking:
         LOWER_SATURATION = dataMasking.lowerSaturation
         LOWER_VALUE = dataMasking.lowerValue
         FOCAL_LENGHT = dataHough.FOCAL_LENGHT
-        print("CAMERA HEIGHT: " + CAMERAHEIGHT)
-        print("BALL DIAMETER: " + BALL_DIAMETER)
+        # print("CAMERA HEIGHT: " + CAMERAHEIGHT)
+        # print("BALL DIAMETER: " + BALL_DIAMETER)
         # print("UPPER HUE: " + UPPER_HUE)
         # print("LOWER HUE: " + LOWER_HUE)
         # print("UPPER SATURATION: " + UPPER_SATURATION)
         # print("UPPER VALUE: " + UPPER_VALUE)
         # print("LOWER SATURATION: " + LOWER_SATURATION)
         # print("LOWER VALUE: " + LOWER_VALUE)
-        print("FOCAL LENGHT: " + FOCAL_LENGHT)
+        # print("FOCAL LENGHT: " + FOCAL_LENGHT)
+        print(FOCAL_LENGHT)
         
         F = 45.78947368421053
-        FinMM = 12.393640349315788
+        FinMM = FOCAL_LENGHT
         fx2 = 1178.473863782612
         fx = 943.8170126557516
         fy = 899.3625747289594
