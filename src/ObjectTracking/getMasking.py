@@ -6,6 +6,7 @@ import atexit
 import math
 from dotenv import load_dotenv
 import models.maskingModel as dataMasking
+import models.houghCircleModel as dataHough
 import os
 
 load_dotenv()
@@ -39,15 +40,15 @@ class getMasking:
         Gaussian = cv2.GaussianBlur(frame, (7, 7), 0)
 
         hsv = cv2.cvtColor(Gaussian, cv2.COLOR_BGR2HSV)
-        CAMERAHEIGHT = os.getenv('CAMERA_HEIGHT')
-        BALL_DIAMETER = os.getenv('BALL_DIAMETER')
+        CAMERAHEIGHT = dataHough.CAMERA_HEIGHT
+        BALL_DIAMETER = dataHough.BALL_DIAMETER
         UPPER_HUE = dataMasking.upperHue
         UPPER_SATURATION = dataMasking.upperSaturation
         UPPER_VALUE = dataMasking.upperValue
         LOWER_HUE = dataMasking.lowerHue
         LOWER_SATURATION = dataMasking.lowerSaturation
         LOWER_VALUE = dataMasking.lowerValue
-        FOCAL_LENGHT = os.getenv('FOCAL_LENGHT')
+        FOCAL_LENGHT = dataHough.FOCAL_LENGHT
         print("CAMERA HEIGHT: " + CAMERAHEIGHT)
         print("BALL DIAMETER: " + BALL_DIAMETER)
         # print("UPPER HUE: " + UPPER_HUE)

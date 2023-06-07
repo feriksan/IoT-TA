@@ -2,6 +2,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 import models.maskingModel as data
+import models.houghCircleModel as dataHough
 import re
 import os
 # from src.ObjectTracking.getMasking import getMasking
@@ -57,6 +58,11 @@ class FirebaseConnect:
 		# 	print(data.lowerHue)
 		# 	# os.environ[upperPath] = event.data
 
+	def HoughHandler(self, event):
+		dataHough.BALL_DIAMETER = event.data['ballDiameter']
+		dataHough.CAMERA_HEIGHT = event.data['cameraHeight']
+		dataHough.FOCAL_LENGHT = event.data['focalLenght']
+
 	def ConfigHandler(self, event):
 		firePath = event.path
 		fireSplit = firePath.replace("/", "")
@@ -76,7 +82,7 @@ class FirebaseConnect:
 
 	def listenData(self):
 		self.MaskingListen = self.refMasking.listen(self.MaskingHandler)
-		self.ConfigListen = self.refSensorConfig.listen(self.ConfigHandler)
+		self.ConfigListen = self.refSensorConfig.listen(self.HoughHandler)
 		self.SensorControl = self.refSensorControll.listen(self.sensorControls)
 	
 	def updateWaterHeight(self, val, objectToCamera, waterStatus):
