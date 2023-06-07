@@ -14,7 +14,7 @@ from src.ObjectTracking.getMasking import getMasking
 # cap =  cv2.VideoCapture(0)
 
 # Control Program
-getMask = getMasking().startVideo()
+getMask = getMasking()
 getMask.startVideo()
 
 # Process(target=asyncio.run(Websocket().startWebsocket.main()))
