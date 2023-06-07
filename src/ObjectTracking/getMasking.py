@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from Firebase.firebaseConnect import FirebaseConnect
+# from Firebase.firebaseConnect import FirebaseConnect
 import time
 import atexit
 import math
@@ -17,7 +17,7 @@ y = 0
 class getMasking:
     img_count = 0
     def __init__(self):
-        self.firebase = FirebaseConnect()
+        print("Masuk")
 
     def nothing(self, x):
         pass
@@ -192,10 +192,11 @@ class getMasking:
         # cv2.imshow("mask", mask)
        	cv2.imshow("result", result)
 
-    def startVideo(self):
+    def startVideo(self,firebase):
         cap =  cv2.VideoCapture(0)
         width = 640
         height = 480
+        self.firebase = firebase
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
         # self.createWindows()

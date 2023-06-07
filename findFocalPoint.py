@@ -31,8 +31,6 @@ while(True):
             
         #get bounding box from countour
         (x, y, w, h) = cv2.boundingRect(c)
-        print(w)
-        print(h)
         #draw bounding box
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 

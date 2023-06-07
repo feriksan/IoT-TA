@@ -3,7 +3,7 @@ import models.maskingModel as dataMasking
 import numpy as np
 
 class Measurement:
-    async def main(self, websocket):
+    async def main(self, websocket, firebase):
         print("Client Connected !")
         cap = cv2.VideoCapture(0)
 
