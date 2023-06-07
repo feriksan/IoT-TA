@@ -18,9 +18,6 @@ class Websocket:
             elif(message == "3"):
                 getMask = getMasking()
                 await getMask.startVideo(websocket, self.firebase)
-            elif(message == "4"):
-                active = active_children()
-                print(active)
 
     async def main(self):
         print("Masuk main")

@@ -36,6 +36,7 @@ class getMasking:
 
     async def videoTracking(self, cap, websocket):
         _, frame = cap.read()
+        await websocket.send("Connected")
         # Gaussian Blur
         Gaussian = cv2.GaussianBlur(frame, (7, 7), 0)
 
@@ -190,11 +191,6 @@ class getMasking:
         # Draw the circles
 
         # cv2.imshow("mask", mask)
-        encoded = cv2.imencode('.jpg', result)[1]
-
-        data = str(base64.b64encode(encoded))
-        data = data[2:len(data)-1]
-        await websocket.send("Connected")
         cv2.imshow("result", result)
 
     async def startVideo(self,websocket, firebase):
