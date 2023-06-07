@@ -5,6 +5,7 @@ import time
 import atexit
 import math
 from dotenv import load_dotenv
+import models.maskingModel as dataMasking
 import os
 
 load_dotenv()
@@ -40,12 +41,12 @@ class getMasking:
         hsv = cv2.cvtColor(Gaussian, cv2.COLOR_BGR2HSV)
         CAMERAHEIGHT = os.getenv('CAMERA_HEIGHT')
         BALL_DIAMETER = os.getenv('BALL_DIAMETER')
-        UPPER_HUE = os.getenv('UPPER_HUE')
-        UPPER_SATURATION = os.getenv('UPPER_SATURATION')
-        UPPER_VALUE = os.getenv('UPPER_VALUE')
-        LOWER_HUE = os.getenv('LOWER_HUE')
-        LOWER_SATURATION = os.getenv('LOWER_SATURATION')
-        LOWER_VALUE = os.getenv('LOWER_VALUE')
+        UPPER_HUE = dataMasking.upperHue
+        UPPER_SATURATION = dataMasking.upperSaturation
+        UPPER_VALUE = dataMasking.upperValue
+        LOWER_HUE = dataMasking.lowerHue
+        LOWER_SATURATION = dataMasking.lowerSaturation
+        LOWER_VALUE = dataMasking.lowerValue
         FOCAL_LENGHT = os.getenv('FOCAL_LENGHT')
         print("CAMERA HEIGHT: " + CAMERAHEIGHT)
         print("BALL DIAMETER: " + BALL_DIAMETER)
