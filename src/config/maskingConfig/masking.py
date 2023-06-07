@@ -1,9 +1,12 @@
 import cv2, base64
 import models.maskingModel as dataMasking
 import numpy as np
+from Firebase.firebaseConnect import FirebaseConnect
 
 class Masking:
     async def main(self, websocket):
+        firebase = FirebaseConnect()
+        firebase.listenData()
         print("Client Connected !")
         cap = cv2.VideoCapture(0)
 
@@ -48,4 +51,5 @@ class Masking:
             
             # if cv2.waitKey(1) & 0xFF == ord('q'):
             #     break
+        firebase.stopListening()
         cap.release()
