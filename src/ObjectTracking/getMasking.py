@@ -138,6 +138,7 @@ class getMasking:
                         # print(jarakSebenarnya)
                         # print(jarakSebenarnya)
                         waterStatus = ""
+                        print("Parameter")
                         print(objectDiameter)
                         print(FinMM)
                         print(diameterInMM)
