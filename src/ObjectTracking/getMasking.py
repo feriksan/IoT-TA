@@ -185,8 +185,8 @@ class getMasking:
 
     def startVideo(self):
         cap =  cv2.VideoCapture(0)
-        width = 1920
-        height = 1080
+        width = 1280
+        height = 720
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
         # self.createWindows()
