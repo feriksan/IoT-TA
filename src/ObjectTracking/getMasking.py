@@ -58,10 +58,9 @@ class getMasking:
         # print("LOWER SATURATION: " + LOWER_SATURATION)
         # print("LOWER VALUE: " + LOWER_VALUE)
         # print("FOCAL LENGHT: " + FOCAL_LENGHT)
-        print(FOCAL_LENGHT)
         
         F = 45.78947368421053
-        FinMM = FOCAL_LENGHT
+        FinMM = 12.393640349315788
         fx2 = 1178.473863782612
         fx = 943.8170126557516
         fy = 899.3625747289594
@@ -139,6 +138,9 @@ class getMasking:
                         # print(jarakSebenarnya)
                         # print(jarakSebenarnya)
                         waterStatus = ""
+                        print(objectDiameter)
+                        print(FinMM)
+                        print(diameterInMM)
                         print(cameraHeight)
                         if(waterHeight > (cameraHeight-10) * 0.8):
                             waterStatus = "Siaga 1"
