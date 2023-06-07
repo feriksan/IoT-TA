@@ -192,7 +192,7 @@ class getMasking:
         # cv2.imshow("mask", mask)
        	cv2.imshow("result", result)
 
-    def startVideo(self,firebase):
+    async def startVideo(self,websocket, firebase):
         cap =  cv2.VideoCapture(0)
         width = 640
         height = 480
@@ -201,6 +201,7 @@ class getMasking:
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
         # self.createWindows()
         # self.firebase.loadConfig()
+        await websocket.send("Connected")
         self.firebase.listenData()
         while True:
             self.videoTracking(cap)

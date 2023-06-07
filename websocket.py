@@ -17,7 +17,7 @@ class Websocket:
                 await startMeasurement.main(websocket, self.firebase)
             elif(message == "3"):
                 getMask = getMasking()
-                getMask.startVideo(self.firebase)
+                await getMask.startVideo(websocket, self.firebase)
             elif(message == "4"):
                 active = active_children()
                 print(active)
