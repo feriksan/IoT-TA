@@ -2,6 +2,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 import models.maskingModel as data
+import models.tempMaskingModel as tempData
 import models.houghCircleModel as dataHough
 import re
 import os
@@ -17,6 +18,7 @@ class FirebaseConnect:
 		default_app
 		# self.runGetMasking = getMasking()
 		self.refMasking = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/maskingConfig")
+		self.refTempMasking = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/tempMaskingConfig")
 		self.refSensorConfig = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/staticParameter")
 		self.refSensorControll = db.reference("/API/WaterControll/-N3c_56YSzzzcuGy04tw/sensorControll")
 	
@@ -40,6 +42,7 @@ class FirebaseConnect:
 		self.MaskingListen.close()
 		self.ConfigListen.close()
 		self.SensorControl.close()
+		self.tempMasking.close()
 
 	def MaskingHandler(self, event):
 		firePath = event.path
@@ -58,6 +61,17 @@ class FirebaseConnect:
 		# 	# data.lowerHue = event.data['lowerHue']
 		# 	print(data.lowerHue)
 		# 	# os.environ[upperPath] = event.data
+
+	def TempMaskingHandler(self, event):
+		firePath = event.path
+		fireSplit = firePath.replace("/", "")
+		print(event.data)
+		tempData.lowerHue = event.data['lowerHue']
+		tempData.lowerSaturation = event.data['lowerSaturation']
+		tempData.lowerValue = event.data['lowerValue']
+		tempData.upperHue = event.data['upperHue']
+		tempData.upperSaturation = event.data['upperSaturation']
+		tempData.upperValue = event.data['upperValue']
 
 	def HoughHandler(self, event):
 		dataHough.BALL_DIAMETER = event.data['ballDiameter']
@@ -85,6 +99,7 @@ class FirebaseConnect:
 		self.MaskingListen = self.refMasking.listen(self.MaskingHandler)
 		self.ConfigListen = self.refSensorConfig.listen(self.HoughHandler)
 		self.SensorControl = self.refSensorControll.listen(self.sensorControls)
+		self.tempMasking = self.refTempMasking.listen(self.TempMaskingHandler)
 	
 	def updateWaterHeight(self, val, objectToCamera, waterStatus):
 		ref = db.reference("/API/WaterControll")

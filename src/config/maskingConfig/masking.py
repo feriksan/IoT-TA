@@ -1,5 +1,5 @@
 import cv2, base64
-import models.maskingModel as dataMasking
+import models.tempMaskingModel as dataMasking
 import numpy as np
 # from Firebase.firebaseConnect import FirebaseConnect
 
