@@ -1,4 +1,4 @@
-import cv2
+import cv2, base64
 import numpy as np
 # from Firebase.firebaseConnect import FirebaseConnect
 import time
@@ -34,7 +34,7 @@ class getMasking:
         greenLower = (0, 24, 23)
         greenUpper = (22, 255, 255)
 
-    def videoTracking(self, cap):
+    async def videoTracking(self, cap, websocket):
         _, frame = cap.read()
         # Gaussian Blur
         Gaussian = cv2.GaussianBlur(frame, (7, 7), 0)
@@ -190,7 +190,12 @@ class getMasking:
         # Draw the circles
 
         # cv2.imshow("mask", mask)
-       	cv2.imshow("result", result)
+        encoded = cv2.imencode('.jpg', result)[1]
+
+        data = str(base64.b64encode(encoded))
+        data = data[2:len(data)-1]
+        await websocket.send("Connected")
+        cv2.imshow("result", result)
 
     async def startVideo(self,websocket, firebase):
         cap =  cv2.VideoCapture(0)
@@ -201,10 +206,9 @@ class getMasking:
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
         # self.createWindows()
         # self.firebase.loadConfig()
-        await websocket.send("Connected")
         self.firebase.listenData()
         while True:
-            self.videoTracking(cap)
+            await self.videoTracking(cap, websocket)
             key = cv2.waitKey(1)
             if key == 27:
                 break
