@@ -39,6 +39,7 @@ class FirebaseConnect:
 	def stopListening(self):
 		self.MaskingListen.close()
 		self.ConfigListen.close()
+		self.SensorControl.close()
 
 	def MaskingHandler(self, event):
 		firePath = event.path
