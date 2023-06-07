@@ -2,10 +2,10 @@ import cv2
 import numpy as np
 
 videoCaptureObject = cv2.VideoCapture(0)
-width = 1280
-height = 720
-videoCaptureObject.set(cv2.CAP_PROP_FRAME_WIDTH, width)
-videoCaptureObject.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+# width = 1280
+# height = 720
+# videoCaptureObject.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+# videoCaptureObject.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 img_count = 0
 jarak_diuji = 20
 diameter_objek = 38
@@ -31,7 +31,8 @@ while(True):
             
         #get bounding box from countour
         (x, y, w, h) = cv2.boundingRect(c)
-        
+        print(w)
+        print(h)
         #draw bounding box
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
