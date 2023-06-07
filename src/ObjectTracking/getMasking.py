@@ -58,6 +58,10 @@ class getMasking:
         # print("LOWER SATURATION: " + LOWER_SATURATION)
         # print("LOWER VALUE: " + LOWER_VALUE)
         # print("FOCAL LENGHT: " + FOCAL_LENGHT)
+        print("Camera Height")
+        print(CAMERAHEIGHT)
+        print("Ball Diameter")
+        print(BALL_DIAMETER)
         
         F = 45.78947368421053
         FinMM = 12.393640349315788
@@ -142,7 +146,6 @@ class getMasking:
                         print(objectDiameter)
                         print(FinMM)
                         print(diameterInMM)
-                        print(cameraHeight)
                         if(waterHeight > (cameraHeight-10) * 0.8):
                             waterStatus = "Siaga 1"
                         elif(waterHeight <= (cameraHeight-10) * 0.8 and waterHeight >= (cameraHeight-10) * 0.7):
